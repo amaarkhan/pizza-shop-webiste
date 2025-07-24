@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haj Pizza & Kebab - Authentic Turkish Cuisine in Elvas, Portugal</title>
+    <meta name="description" content="Experience authentic Turkish cuisine at Haj Pizza & Kebab in Elvas, Portugal. Fresh kebabs, delicious pizzas, and traditional Turkish dishes.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Haj Pizza & Kebab</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#deals" class="nav-link">Deals</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome to Haj Pizza & Kebab</h1>
+            <p>Authentic Turkish Cuisine in the Heart of Elvas</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">View Menu</a>
+                <a href="tel:+351937854433" class="btn btn-secondary">Order Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Haj Pizza & Kebab</h2>
+                    <p>Located in the historic city of Elvas, Portugal, Haj Pizza & Kebab brings you the authentic flavors of Turkish cuisine. Our commitment to fresh ingredients, traditional recipes, and exceptional service makes us the go-to destination for kebabs, pizzas, and Turkish specialties.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <h3>Fresh Ingredients</h3>
+                            <p>We use only the freshest ingredients in all our dishes</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <h3>Fast Service</h3>
+                            <p>Quick preparation without compromising on quality</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <h3>Authentic Recipes</h3>
+                            <p>Traditional Turkish recipes passed down through generations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Turkish Kebab" class="feature-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-tabs">
+                <button class="tab-btn active" onclick="showTab('kebab')">Kebab</button>
+                <button class="tab-btn" onclick="showTab('pizza')">Pizza</button>
+                <button class="tab-btn" onclick="showTab('durum')">Durum</button>
+                <button class="tab-btn" onclick="showTab('plates')">Plates</button>
+                <button class="tab-btn" onclick="showTab('menus')">Menus</button>
+            </div>
+
+            <!-- Kebab Tab -->
+            <div id="kebab" class="tab-content active">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Normal Kebab">
+                        <h3>Normal Kebab</h3>
+                        <p>Pão, carne ou frango, salada e molho</p>
+                        <span class="price">€4.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mixed Kebab">
+                        <h3>Misto Kebab</h3>
+                        <p>Pão, carne e frango, salada e molho</p>
+                        <span class="price">€4.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Cheese Kebab">
+                        <h3>Normal com Queijo</h3>
+                        <p>Pão, carne ou frango, queijo, salada e molho</p>
+                        <span class="price">€4.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Double Kebab">
+                        <h3>Doble Kebab</h3>
+                        <p>Pão, carne ou frango, salada e molho</p>
+                        <span class="price">€5.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Meat Only">
+                        <h3>Apenas Carne</h3>
+                        <p>Pão, carne ou frango</p>
+                        <span class="price">€4.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Vegetal Kebab">
+                        <h3>Vegetal</h3>
+                        <p>Pão, queijo, salada e molho</p>
+                        <span class="price">€3.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Falafel Kebab">
+                        <h3>De Falafel</h3>
+                        <p>Pão, falafel, salada e molho</p>
+                        <span class="price">€3.50</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pizza Tab -->
+            <div id="pizza" class="tab-content">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Margherita Pizza">
+                        <h3>Margarita</h3>
+                        <p>Mozzarella, orégano, tomate</p>
+                        <span class="price">Small: €6 | Grande: €10</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Chicken Pizza">
+                        <h3>Frango</h3>
+                        <p>Mozzarella, cebola, frango, pimento, azeitonas</p>
+                        <span class="price">Small: €7 | Grande: €11</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1571066811602-716837d681de?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Vegetarian Pizza">
+                        <h3>Vegetariana</h3>
+                        <p>Mozzarella, cebola, cogumelo, pimento, tomate, azeitonas</p>
+                        <span class="price">Small: €7.50 | Grande: €10.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Neptune Pizza">
+                        <h3>Neptune</h3>
+                        <p>Mozzarella, atum, azeitonas, milho</p>
+                        <span class="price">Small: €6.80 | Grande: €10.80</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Hawaiian Pizza">
+                        <h3>Hawaiian</h3>
+                        <p>Mozzarella, frango, ananás, milho, orégano</p>
+                        <span class="price">Small: €6.80 | Grande: €10</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Pizza Kebab">
+                        <h3>Pizza Kebab</h3>
+                        <p>Mozzarella, cebola, frango, salada, pepino, tomate, alho</p>
+                        <span class="price">Small: €7.50 | Grande: €11</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Durum Tab -->
+            <div id="durum" class="tab-content">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Normal Durum">
+                        <h3>Normal Durum</h3>
+                        <p>Pão, carne ou frango, salada e molho</p>
+                        <span class="price">€5.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Double Durum">
+                        <h3>Doble Durum</h3>
+                        <p>Pão, carne ou frango, salada e molho</p>
+                        <span class="price">€6.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Cheese Durum">
+                        <h3>Normal com Queijo</h3>
+                        <p>Pão, carne ou frango, queijo, salada e molho</p>
+                        <span class="price">€5.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Meat Only Durum">
+                        <h3>Apenas Carne</h3>
+                        <p>Pão, carne ou frango</p>
+                        <span class="price">€6.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Potato Durum">
+                        <h3>Com Batatas</h3>
+                        <p>Pão, carne ou frango, batatas e molho</p>
+                        <span class="price">€6.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Falafel Durum">
+                        <h3>De Falafel</h3>
+                        <p>Pão, falafel, salada e molho</p>
+                        <span class="price">€4.50</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plates Tab -->
+            <div id="plates" class="tab-content">
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Kebab Plate">
+                        <h3>Prato Kebab</h3>
+                        <p>Pão, carne ou frango, salada e molho</p>
+                        <span class="price">€5.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Kebab with Rice">
+                        <h3>Kebab com Batatas ou Arroz</h3>
+                        <p>Pão, carne ou frango, salada e molho</p>
+                        <span class="price">€6.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Only Meat">
+                        <h3>Apenas Carne</h3>
+                        <p>Carne ou frango</p>
+                        <span class="price">€7.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="House Special">
+                        <h3>Kebab da Casa</h3>
+                        <p>Pão, carne ou frango, batatas, arroz, salada e molho</p>
+                        <span class="price">€8.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Special HA">
+                        <h3>Especial H.A.</h3>
+                        <p>Pão, carne ou frango, batata, queijo, falafel, salada e molho</p>
+                        <span class="price">€8.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Turkish Salad">
+                        <h3>Salada Turca</h3>
+                        <p>Fresh Turkish salad</p>
+                        <span class="price">€4.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menus Tab -->
+            <div id="menus" class="tab-content">
+                <div class="menu-header">
+                    <h3>🍟 Complete Menus (Includes + Batatas + Refresco)</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Kebab Menu">
+                        <h3>Kebab Menu</h3>
+                        <p>Kebab carne ou frango + batatas + refrigerante</p>
+                        <span class="price">€6.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Durum Menu">
+                        <h3>Durum Menu</h3>
+                        <p>Durum carne ou frango + batatas + refrigerante</p>
+                        <span class="price">€7.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Pizza Menu">
+                        <h3>Pizza Turca Menu</h3>
+                        <p>Pizza turca + batatas + refrigerante</p>
+                        <span class="price">€7.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Chicken Menu">
+                        <h3>Popcorn de Frango Menu</h3>
+                        <p>Popcorn de frango + batatas + refrigerante</p>
+                        <span class="price">€5.50</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Hamburger Menu">
+                        <h3>Hamburger Menu</h3>
+                        <p>Hamburger + batatas + refrigerante</p>
+                        <span class="price">€5.50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deals Section -->
+    <section id="deals" class="deals">
+        <div class="container">
+            <h2 class="section-title">Special Deals</h2>
+            <div class="deals-grid">
+                <div class="deal-item">
+                    <img src="deals/d1.jpg" alt="Special Deal 1">
+                    <div class="deal-overlay">
+                        <h3>Special Offer</h3>
+                        <p>Check out our amazing deals!</p>
+                    </div>
+                </div>
+                <div class="deal-item">
+                    <img src="deals/d2.jpg" alt="Special Deal 2">
+                    <div class="deal-overlay">
+                        <h3>Limited Time</h3>
+                        <p>Don't miss these great offers!</p>
+                    </div>
+                </div>
+                <div class="deal-item">
+                    <img src="deals/d3.jpg" alt="Special Deal 3">
+                    <div class="deal-overlay">
+                        <h3>Best Value</h3>
+                        <p>Great food at great prices!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>R. de Alcamim 29<br>7350-148 Elvas, Portugal</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p><a href="tel:+351937854433">+351 937 854 433</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Hours</h3>
+                            <p>Open ⋅ Closes 11:30 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-facebook"></i>
+                        <div>
+                            <h3>Follow Us</h3>
+                            <p><a href="https://www.facebook.com/hajPizzaKebab/" target="_blank">Facebook Page</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3139.8123456789!2d-7.1234567!3d38.8765432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDUyJzM1LjYiTiA3wrAwNycyNC40Ilc!5e0!3m2!1sen!2spt!4v1234567890123" 
+                        width="100%" 
+                        height="300" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Haj Pizza & Kebab</h3>
+                    <p>Authentic Turkish cuisine in Elvas, Portugal. Fresh ingredients, traditional recipes, exceptional service.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#deals">Deals</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>R. de Alcamim 29, Elvas</p>
+                    <p>+351 937 854 433</p>
+                    <p>Open until 11:30 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Haj Pizza & Kebab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
