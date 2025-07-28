@@ -68,6 +68,28 @@ function showTab(tabName) {
     });
 }
 
+// Menu Images Toggle Functionality
+function toggleMenuImages() {
+    const menuImages = document.getElementById('menu-images');
+    const toggleBtn = document.querySelector('.menu-toggle-btn');
+    
+    if (menuImages.style.display === 'none' || menuImages.style.display === '') {
+        menuImages.style.display = 'block';
+        toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Menu';
+        
+        // Smooth scroll to menu images
+        setTimeout(() => {
+            menuImages.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }, 100);
+    } else {
+        menuImages.style.display = 'none';
+        toggleBtn.innerHTML = '<i class="fas fa-images"></i> View Full Menu';
+    }
+}
+
 // Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -267,6 +289,12 @@ function createScrollToTopButton() {
 
 // Initialize scroll to top button
 document.addEventListener('DOMContentLoaded', createScrollToTopButton);
+
+// WhatsApp Button Click Analytics
+document.querySelector('.whatsapp-btn').addEventListener('click', () => {
+    console.log('WhatsApp button clicked');
+    // You can add analytics tracking here
+});
 
 // Performance optimization: Throttle scroll events
 function throttle(func, wait) {
