@@ -10,6 +10,18 @@ body {
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 768px) {
+    a, button, .nav-link, .tab-btn, .menu-toggle-btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .container {
@@ -108,6 +120,13 @@ body {
     position: relative;
 }
 
+/* Fix background attachment for mobile devices */
+@media (max-width: 1024px) {
+    .hero {
+        background-attachment: scroll;
+    }
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -156,6 +175,11 @@ body {
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 1px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn-primary {
@@ -434,9 +458,26 @@ body {
 
 .menu-images-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 0 2rem;
+}
+
+/* Mobile optimization for menu images */
+@media (max-width: 768px) {
+    .menu-images-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-images-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
 }
 
 .menu-image-item {
@@ -610,6 +651,17 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+    
+    .menu-images-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
@@ -631,13 +683,27 @@ body {
         display: flex;
     }
 
+    /* Fix hero section for mobile */
+    .hero {
+        background-attachment: scroll !important;
+        background-position: center center;
+        background-size: cover;
+        min-height: 100vh;
+    }
+
     .hero-content h1 {
         font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
     }
 
     .about-content {
@@ -652,14 +718,17 @@ body {
 
     .menu-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .deals-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .features {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .footer-content {
@@ -670,30 +739,85 @@ body {
     .menu-tabs {
         flex-direction: column;
         align-items: center;
+        gap: 0.5rem;
     }
 
     .tab-btn {
         width: 200px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Fix menu images for mobile */
+    .menu-images {
+        margin-bottom: 2rem;
+        padding: 1rem;
     }
 
     .menu-images-grid {
         grid-template-columns: 1fr;
-        padding: 0 1rem;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .menu-image-item {
+        margin: 0 auto;
+        max-width: 100%;
     }
 
     .menu-toggle-btn {
         padding: 10px 25px;
         font-size: 0.9rem;
+        width: auto;
+        max-width: 250px;
+    }
+
+    /* Ensure WhatsApp button is visible */
+    .whatsapp-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1001;
+        display: flex !important;
+    }
+
+    /* Adjust sections padding for mobile */
+    .menu, .about, .deals, .contact {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
     }
 }
 
 @media (max-width: 480px) {
+    /* Fix hero for very small screens */
+    .hero {
+        background-attachment: scroll !important;
+        background-position: center top;
+        min-height: 100vh;
+        padding: 0 10px;
+    }
+
+    .hero-content {
+        padding: 0 10px;
+    }
+
     .hero-content h1 {
         font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .container {
@@ -703,14 +827,76 @@ body {
     .btn {
         padding: 10px 20px;
         font-size: 0.9rem;
+        min-width: 150px;
     }
 
+    /* WhatsApp button for very small screens */
     .whatsapp-btn {
         width: 50px;
         height: 50px;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         bottom: 15px;
         right: 15px;
+    }
+
+    /* Menu improvements for small screens */
+    .menu-toggle-btn {
+        width: 90%;
+        max-width: none;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .menu-images {
+        padding: 1rem 0.5rem;
+    }
+
+    .menu-item {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .menu-item h3 {
+        font-size: 1.1rem;
+        padding: 0.8rem;
+    }
+
+    .menu-item p {
+        font-size: 0.85rem;
+        padding: 0 0.8rem;
+    }
+
+    .menu-item .price {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    /* Navigation improvements */
+    .nav-container {
+        padding: 0 15px;
+    }
+
+    .nav-logo h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Deal items for mobile */
+    .deal-item {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .deal-item img {
+        height: 250px;
+    }
+
+    /* About section mobile */
+    .about-text h2 {
+        font-size: 2rem;
+    }
+
+    .feature-image {
+        height: 250px;
     }
 }
 
@@ -726,14 +912,16 @@ body {
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     font-size: 1.8rem;
-    z-index: 1001;
+    z-index: 9999;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     text-decoration: none;
+    visibility: visible;
+    opacity: 1;
 }
 
 .whatsapp-btn:hover {
