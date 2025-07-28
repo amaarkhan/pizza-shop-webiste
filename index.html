@@ -87,6 +87,25 @@
                 <button class="tab-btn" onclick="showTab('plates')">Plates</button>
                 <button class="tab-btn" onclick="showTab('menus')">Menus</button>
             </div>
+            
+            <!-- Menu Images Toggle Button -->
+            <div class="menu-images-toggle">
+                <button class="menu-toggle-btn" onclick="toggleMenuImages()">
+                    <i class="fas fa-images"></i> View Full Menu
+                </button>
+            </div>
+
+            <!-- Menu Images Section -->
+            <div id="menu-images" class="menu-images" style="display: none;">
+                <div class="menu-images-grid">
+                    <div class="menu-image-item">
+                        <img src="m1.jpg" alt="Menu Page 1" class="menu-image">
+                    </div>
+                    <div class="menu-image-item">
+                        <img src="m2.jpg" alt="Menu Page 2" class="menu-image">
+                    </div>
+                </div>
+            </div>
 
             <!-- Kebab Tab -->
             <div id="kebab" class="tab-content active">
@@ -412,6 +431,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/351937854433?text=Hello! I'd like to place an order from Haj Pizza & Kebab" class="whatsapp-btn" target="_blank" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="script.js"></script>
 </body>
