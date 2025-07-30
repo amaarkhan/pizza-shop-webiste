@@ -95,10 +95,12 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 // Set default language on load
 document.addEventListener('DOMContentLoaded', function() {
-    const activeBtn = document.querySelector('.lang-btn.active');
-    if (activeBtn) {
-        switchLanguage(activeBtn.dataset.lang);
-    }
+    // Set default language to Portuguese (pt)
+    switchLanguage('pt');
+    // Set PT button as active
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    const ptBtn = document.querySelector('.lang-btn[data-lang="pt"]');
+    if (ptBtn) ptBtn.classList.add('active');
 });
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
