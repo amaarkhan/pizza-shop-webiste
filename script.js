@@ -1,3 +1,105 @@
+// Language Switcher Functionality
+const translations = {
+    en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_menu: "Menu",
+        nav_deals: "Deals",
+        nav_contact: "Contact",
+        hero_title: "Welcome to Haj Pizza & Kebab",
+        hero_subtitle: "Authentic Turkish Cuisine in the Heart of Elvas",
+        hero_view_menu: "View Menu",
+        hero_order_now: "Order Now",
+        about_title: "About Haj Pizza & Kebab",
+        about_desc: "Located in the historic city of Elvas, Portugal, Haj Pizza & Kebab brings you the authentic flavors of Turkish cuisine. Our commitment to fresh ingredients, traditional recipes, and exceptional service makes us the go-to destination for kebabs, pizzas, and Turkish specialties.",
+        feature_halal_title: "100% Halal Certified",
+        feature_halal_desc: "All our meat and ingredients are halal certified for your peace of mind",
+        feature_fresh_title: "Fresh Ingredients",
+        feature_fresh_desc: "We use only the freshest ingredients in all our dishes",
+        feature_fast_title: "Fast Service",
+        feature_fast_desc: "Quick preparation without compromising on quality",
+        feature_authentic_title: "Authentic Recipes",
+        feature_authentic_desc: "Traditional Turkish recipes passed down through generations",
+        halal_menu_badge: "All our meat is 100% HALAL certified",
+        tab_kebab: "Kebab",
+        tab_pizza: "Pizza",
+        tab_durum: "Durum",
+        tab_plates: "Plates",
+        tab_menus: "Menus",
+        menu_header: "🍟 Complete Menus (Includes + Batatas + Refresco)",
+        deals_halal_badge: "✨ 100% HALAL CERTIFIED DEALS ✨",
+        footer_title: "Haj Pizza & Kebab",
+        footer_desc: "Authentic Turkish cuisine in Elvas, Portugal. Fresh ingredients, traditional recipes, exceptional service.",
+        footer_links: "Quick Links",
+        footer_contact: "Contact Info",
+        footer_address: "R. de Alcamim 29, Elvas",
+        footer_phone: "+351 937 854 433",
+        footer_hours: "Open until 11:30 PM"
+    },
+    pt: {
+        nav_home: "Início",
+        nav_about: "Sobre",
+        nav_menu: "Menu",
+        nav_deals: "Promoções",
+        nav_contact: "Contato",
+        hero_title: "Bem-vindo ao Haj Pizza & Kebab",
+        hero_subtitle: "Culinária Turca Autêntica no Coração de Elvas",
+        hero_view_menu: "Ver Menu",
+        hero_order_now: "Pedir Agora",
+        about_title: "Sobre o Haj Pizza & Kebab",
+        about_desc: "Localizado na histórica cidade de Elvas, Portugal, o Haj Pizza & Kebab traz para você os autênticos sabores da culinária turca. Nosso compromisso com ingredientes frescos, receitas tradicionais e serviço excepcional faz de nós o destino ideal para kebabs, pizzas e especialidades turcas.",
+        feature_halal_title: "100% Halal Certificado",
+        feature_halal_desc: "Toda a nossa carne e ingredientes são certificados halal para sua tranquilidade",
+        feature_fresh_title: "Ingredientes Frescos",
+        feature_fresh_desc: "Usamos apenas os ingredientes mais frescos em todos os nossos pratos",
+        feature_fast_title: "Serviço Rápido",
+        feature_fast_desc: "Preparação rápida sem comprometer a qualidade",
+        feature_authentic_title: "Receitas Autênticas",
+        feature_authentic_desc: "Receitas turcas tradicionais passadas de geração em geração",
+        halal_menu_badge: "Toda a nossa carne é 100% HALAL certificada",
+        tab_kebab: "Kebab",
+        tab_pizza: "Pizza",
+        tab_durum: "Durum",
+        tab_plates: "Pratos",
+        tab_menus: "Menus",
+        menu_header: "🍟 Menus Completos (Inclui + Batatas + Refrigerante)",
+        deals_halal_badge: "✨ PROMOÇÕES 100% HALAL CERTIFICADAS ✨",
+        footer_title: "Haj Pizza & Kebab",
+        footer_desc: "Culinária turca autêntica em Elvas, Portugal. Ingredientes frescos, receitas tradicionais, serviço excepcional.",
+        footer_links: "Links Rápidos",
+        footer_contact: "Informações de Contato",
+        footer_address: "R. de Alcamim 29, Elvas",
+        footer_phone: "+351 937 854 433",
+        footer_hours: "Aberto até 23:30"
+    }
+};
+
+function switchLanguage(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const lang = this.dataset.lang;
+        switchLanguage(lang);
+    });
+});
+
+// Set default language on load
+document.addEventListener('DOMContentLoaded', function() {
+    const activeBtn = document.querySelector('.lang-btn.active');
+    if (activeBtn) {
+        switchLanguage(activeBtn.dataset.lang);
+    }
+});
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
