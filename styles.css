@@ -1,9 +1,11 @@
 /* Language Switcher */
+/* Language Switcher */
 .nav-lang-switcher {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     margin-left: 1.5rem;
+    z-index: 1100;
 }
 .lang-btn {
     background: transparent;
@@ -22,12 +24,16 @@
     background: #ff6b35;
     color: #fff;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .nav-lang-switcher {
         margin-left: 0;
         position: absolute;
-        right: 70px;
+        right: 20px;
         top: 18px;
+        background: rgba(0,0,0,0.85);
+        border-radius: 20px;
+        padding: 2px 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 }
 /* Reset and Base Styles */
@@ -53,6 +59,38 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .nav-lang-switcher {
+        right: 16px;
+        top: 12px;
+        padding: 2px 4px;
+    }
+    .nav-menu {
+        flex-direction: column;
+        gap: 1.2rem;
+        background: rgba(0,0,0,0.98);
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 70px);
+        z-index: 1000;
+        padding-top: 2rem;
+        align-items: center;
+        justify-content: flex-start;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .nav-menu.active {
+        transform: translateY(0);
+    }
+    .nav-toggle {
+        display: flex;
+        position: absolute;
+        right: 16px;
+        top: 18px;
+        z-index: 1101;
     }
 }
 
@@ -122,10 +160,16 @@ body {
     width: 100%;
 }
 
+/* Hamburger menu toggle for mobile */
 .nav-toggle {
     display: none;
     flex-direction: column;
     cursor: pointer;
+}
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
 }
 
 .bar {
