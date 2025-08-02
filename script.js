@@ -308,11 +308,170 @@ document.querySelectorAll('img').forEach(img => {
     });
 });
 
-// Add to Cart Functionality (Future Enhancement)
+// Cart System
+let cart = JSON.parse(localStorage.getItem('hajPizzaCart')) || [];
+
+// Add to Cart Functionality
 function addToCart(itemName, price) {
-    console.log(`Added ${itemName} - €${price} to cart`);
-    // Future: Implement cart functionality
-    alert(`${itemName} added to cart!`);
+    const existingItem = cart.find(item => item.name === itemName);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            name: itemName,
+            price: parseFloat(price),
+            quantity: 1
+        });
+    }
+    
+    localStorage.setItem('hajPizzaCart', JSON.stringify(cart));
+    updateCartDisplay();
+    showCartNotification(itemName);
+}
+
+// Pizza Size Selection and Add to Cart
+function addPizzaToCart(button, pizzaName) {
+    const menuItem = button.closest('.menu-item');
+    const activeSizeBtn = menuItem.querySelector('.size-btn.active');
+    const size = activeSizeBtn.dataset.size;
+    const price = parseFloat(activeSizeBtn.dataset.price);
+    const sizeText = size === 'small' ? 'Small' : 'Grande';
+    const fullName = `${pizzaName} (${sizeText})`;
+    
+    addToCart(fullName, price);
+}
+
+// Pizza Size Selector Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners for pizza size buttons
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('size-btn')) {
+            const menuItem = e.target.closest('.menu-item');
+            const sizeButtons = menuItem.querySelectorAll('.size-btn');
+            
+            // Remove active class from all size buttons in this menu item
+            sizeButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            e.target.classList.add('active');
+        }
+    });
+});
+
+// Update Cart Display
+function updateCartDisplay() {
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    
+    // Update cart counter
+    const cartCounter = document.querySelector('.cart-counter');
+    if (cartCounter) {
+        cartCounter.textContent = cartCount;
+        cartCounter.style.display = cartCount > 0 ? 'block' : 'none';
+    }
+    
+    // Update cart total in sidebar
+    const cartTotalElement = document.querySelector('.cart-total');
+    if (cartTotalElement) {
+        cartTotalElement.textContent = `Total: €${cartTotal.toFixed(2)}`;
+    }
+    
+    // Update cart items list
+    const cartItemsList = document.querySelector('.cart-items');
+    if (cartItemsList) {
+        cartItemsList.innerHTML = '';
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <div class="cart-item-details">
+                    <span class="cart-item-name">${item.name}</span>
+                    <span class="cart-item-price">€${item.price.toFixed(2)}</span>
+                </div>
+                <div class="cart-item-controls">
+                    <button onclick="updateCartItemQuantity('${item.name}', -1)" class="cart-btn-minus">-</button>
+                    <span class="cart-item-quantity">${item.quantity}</span>
+                    <button onclick="updateCartItemQuantity('${item.name}', 1)" class="cart-btn-plus">+</button>
+                    <button onclick="removeFromCart('${item.name}')" class="cart-btn-remove">🗑️</button>
+                </div>
+            `;
+            cartItemsList.appendChild(cartItem);
+        });
+    }
+}
+
+// Update Cart Item Quantity
+function updateCartItemQuantity(itemName, change) {
+    const item = cart.find(item => item.name === itemName);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(itemName);
+            return;
+        }
+        localStorage.setItem('hajPizzaCart', JSON.stringify(cart));
+        updateCartDisplay();
+    }
+}
+
+// Remove Item from Cart
+function removeFromCart(itemName) {
+    cart = cart.filter(item => item.name !== itemName);
+    localStorage.setItem('hajPizzaCart', JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+// Clear Cart
+function clearCart() {
+    cart = [];
+    localStorage.setItem('hajPizzaCart', JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+// Show Cart Notification
+function showCartNotification(itemName) {
+    const notification = document.createElement('div');
+    notification.className = 'cart-notification';
+    notification.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        ${itemName} added to cart!
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 2000);
+}
+
+// Toggle Cart Sidebar
+function toggleCart() {
+    const cartSidebar = document.querySelector('.cart-sidebar');
+    cartSidebar.classList.toggle('open');
+}
+
+// Checkout Function
+function checkout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemsList = cart.map(item => `${item.quantity}x ${item.name}`).join('\n');
+    
+    const message = `Olá! Gostaria de fazer o seguinte pedido:\n\n${itemsList}\n\nTotal: €${total.toFixed(2)}\n\nObrigado!`;
+    const phoneNumber = "+351937854433";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
 }
 
 // Contact Form Validation (if form is added later)
@@ -393,6 +552,9 @@ function createScrollToTopButton() {
 
 // Initialize scroll to top button
 document.addEventListener('DOMContentLoaded', createScrollToTopButton);
+
+// Initialize cart display
+document.addEventListener('DOMContentLoaded', updateCartDisplay);
 
 // WhatsApp Button Click Analytics
 document.querySelector('.whatsapp-btn').addEventListener('click', () => {
