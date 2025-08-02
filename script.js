@@ -1,3 +1,47 @@
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_yloz27h'; // Your EmailJS Service ID
+const EMAILJS_TEMPLATE_ID = 'template_6kd7p5h'; // Your EmailJS Template ID
+const EMAILJS_PUBLIC_KEY = 'SjiMeU5n6Ql4-pX1V'; // Your EmailJS Public Key
+
+// Initialize EmailJS
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+        console.log('EmailJS initialized successfully');
+        
+        // Test EmailJS connection (optional - remove in production)
+        window.testEmailJS = function() {
+            const testParams = {
+                order_id: 'TEST123',
+                name: 'Test Customer',
+                email: 'test@example.com',
+                phone: '123456789',
+                address: 'Test Address',
+                orders: JSON.stringify([{name: 'Test Item', price: 10, quantity: 1}]),
+                'cost.subtotal': '10.00',
+                'cost.shipping': '2.50',
+                'cost.total': '12.50',
+                'restaurant.name': 'Mesa Turka',
+                'restaurant.phone': '+351 937 854 433',
+                'restaurant.address': 'Porto, Portugal'
+            };
+            
+            console.log('Testing EmailJS with params:', testParams);
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, testParams)
+                .then(function(response) {
+                    console.log('Test email sent successfully!', response);
+                    alert('Test email sent successfully!');
+                }, function(error) {
+                    console.error('Test email failed:', error);
+                    alert('Test email failed: ' + JSON.stringify(error));
+                });
+        };
+        
+    } else {
+        console.error('EmailJS library not loaded');
+    }
+});
+
 // Language Switcher Functionality
 const translations = {
     en: {
@@ -344,6 +388,9 @@ function addPizzaToCart(button, pizzaName) {
 
 // Pizza Size Selector Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize cart display on page load
+    updateCartDisplay();
+    
     // Add event listeners for pizza size buttons
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('size-btn')) {
@@ -422,6 +469,77 @@ function removeFromCart(itemName) {
     updateCartDisplay();
 }
 
+// Function to show success message modal
+function showSuccessMessage(orderId) {
+    // Create success modal HTML
+    const successModal = document.createElement('div');
+    successModal.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        ">
+            <div style="
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 400px;
+                margin: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            ">
+                <div style="
+                    font-size: 60px;
+                    margin-bottom: 20px;
+                ">🎉</div>
+                <h2 style="
+                    color: #d32f2f;
+                    margin-bottom: 15px;
+                    font-family: Arial, sans-serif;
+                ">Order Placed Successfully!</h2>
+                <p style="
+                    color: #333;
+                    margin-bottom: 10px;
+                    font-size: 16px;
+                "><strong>Order ID:</strong> ${orderId}</p>
+                <p style="
+                    color: #666;
+                    margin-bottom: 20px;
+                    font-size: 14px;
+                ">A confirmation email has been sent to you.<br>
+                Your order details have been sent to our kitchen!</p>
+                <button onclick="this.parentElement.parentElement.remove()" style="
+                    background: #d32f2f;
+                    color: white;
+                    border: none;
+                    padding: 12px 25px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: bold;
+                ">Close</button>
+            </div>
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(successModal);
+    
+    // Auto close after 5 seconds
+    setTimeout(() => {
+        if (successModal.parentElement) {
+            successModal.remove();
+        }
+    }, 5000);
+}
+
 // Clear Cart
 function clearCart() {
     cart = [];
@@ -457,22 +575,299 @@ function toggleCart() {
     cartSidebar.classList.toggle('open');
 }
 
-// Checkout Function
+// Checkout Function - Updated to show order form instead of WhatsApp
 function checkout() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
     }
     
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const itemsList = cart.map(item => `${item.quantity}x ${item.name}`).join('\n');
+    // Close cart sidebar
+    toggleCart();
     
-    const message = `Olá! Gostaria de fazer o seguinte pedido:\n\n${itemsList}\n\nTotal: €${total.toFixed(2)}\n\nObrigado!`;
+    // Show order form modal
+    showOrderForm();
+}
+
+// Show Order Form Modal
+function showOrderForm() {
+    const modal = document.getElementById('orderModal');
+    modal.style.display = 'block';
+    
+    // Populate order summary
+    updateOrderSummary();
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Order Form Modal
+function closeOrderForm() {
+    const modal = document.getElementById('orderModal');
+    modal.style.display = 'none';
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+}
+
+// Update Order Summary in Modal
+function updateOrderSummary() {
+    const orderItems = document.getElementById('orderItems');
+    const orderTotal = document.getElementById('orderTotalAmount');
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    orderItems.innerHTML = '';
+    cart.forEach(item => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        orderItem.innerHTML = `
+            <div class="order-item-info">
+                <div class="order-item-name">${item.name}</div>
+                <div class="order-item-qty">Quantity: ${item.quantity}</div>
+            </div>
+            <div class="order-item-price">€${(item.price * item.quantity).toFixed(2)}</div>
+        `;
+        orderItems.appendChild(orderItem);
+    });
+    
+    orderTotal.textContent = `€${total.toFixed(2)}`;
+}
+
+// Initialize EmailJS (Add your EmailJS credentials)
+
+// Handle Order Form Submission
+document.addEventListener('DOMContentLoaded', function() {
+    const orderForm = document.getElementById('orderForm');
+    if (orderForm) {
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitOrder();
+        });
+    }
+});
+
+// Submit Order via EmailJS
+function submitOrder() {
+    const form = document.getElementById('orderForm');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    
+    // Show loading state
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Order...';
+    submitBtn.disabled = true;
+    
+    // Collect form data
+    const customerName = document.getElementById('customerName').value;
+    const customerPhone = document.getElementById('customerPhone').value;
+    const customerEmail = document.getElementById('customerEmail').value;
+    const deliveryAddress = document.getElementById('deliveryAddress').value;
+    const orderNotes = document.getElementById('orderNotes').value;
+    
+    // Validate required fields
+    if (!customerName || !customerPhone || !customerEmail || !deliveryAddress) {
+        alert('Please fill in all required fields.');
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        return;
+    }
+    
+    // Prepare order details
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryFee = 2.50; // Set your delivery fee
+    const total = subtotal + deliveryFee;
+    
+    // Generate unique order ID
+    const orderId = 'HPK' + Date.now().toString().slice(-6);
+    
+    // Get current date and time
+    const now = new Date();
+    const orderDate = now.toLocaleDateString('pt-PT');
+    const orderTime = now.toLocaleTimeString('pt-PT');
+    
+    // Format order items as HTML text for EmailJS template
+    const orderItemsHTML = cart.map(item => 
+        `<div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
+            <strong>${item.name}</strong><br>
+            Quantity: ${item.quantity} | Price: €${item.price.toFixed(2)} each<br>
+            Subtotal: €${(item.price * item.quantity).toFixed(2)}
+        </div>`
+    ).join('');
+    
+    // Prepare email template parameters - matching your EmailJS template exactly
+    const templateParams = {
+        // Order details (matching template variables)
+        order_id: orderId,
+        order_date: orderDate,
+        order_time: orderTime,
+        order_total: total.toFixed(2),
+        
+        // Customer information (matching template variables)
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        customer_email: customerEmail,
+        delivery_address: deliveryAddress,
+        
+        // Order items and pricing (matching template variables)
+        order_items_html: orderItemsHTML,
+        subtotal: subtotal.toFixed(2),
+        delivery_fee: deliveryFee.toFixed(2),
+        
+        // Special instructions (matching template variables)
+        special_instructions: orderNotes || 'No special instructions'
+    };
+    
+    // Send email via EmailJS
+    if (typeof emailjs !== 'undefined') {
+        console.log('Sending email with params:', templateParams);
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(function(response) {
+                console.log('Order sent successfully!', response.status, response.text);
+                
+                // Show custom success message
+                showSuccessMessage(orderId);
+                
+                // Clear cart and close modal
+                clearCart();
+                closeOrderForm();
+                
+                // Reset form
+                form.reset();
+                
+                // Reset button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+            }, function(error) {
+                console.log('Failed to send order:', error);
+                
+                // Show detailed error message
+                alert(`Failed to send order. Error: ${error.text || error.message || 'Unknown error'}. Please try again or contact us directly at +351 937 854 433.`);
+                
+                // Reset button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+    } else {
+        // EmailJS not loaded, show error
+        console.error('EmailJS not loaded');
+        alert('Email service not available. Please contact us directly at +351 937 854 433');
+        
+        // Reset button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
+// Show success message
+function showSuccessMessage(orderId) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'order-success-notification';
+    successMessage.innerHTML = `
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>Order Placed Successfully!</h3>
+            <p>Your order #${orderId} has been confirmed.</p>
+            <p>A confirmation email has been sent to your email address.</p>
+            <p>We'll contact you shortly to confirm delivery details.</p>
+        </div>
+    `;
+    
+    document.body.appendChild(successMessage);
+    
+    // Force reflow
+    successMessage.offsetHeight;
+    
+    setTimeout(() => {
+        successMessage.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        successMessage.classList.remove('show');
+        setTimeout(() => {
+            if (document.body.contains(successMessage)) {
+                document.body.removeChild(successMessage);
+            }
+        }, 300);
+    }, 5000);
+}
+
+// Fallback to WhatsApp if email fails
+function fallbackToWhatsApp(orderData) {
+    const message = `Olá! Gostaria de fazer o seguinte pedido:
+
+📋 PEDIDO #${orderData.order_id}
+📅 Data: ${orderData.order_date}
+
+👤 DADOS DO CLIENTE:
+Nome: ${orderData.customer_name}
+Telefone: ${orderData.customer_phone}
+Email: ${orderData.customer_email}
+Morada: ${orderData.delivery_address}
+
+🛒 ITENS DO PEDIDO:
+${orderData.order_items}
+
+💰 Total: ${orderData.order_total}
+
+📝 Instruções especiais:
+${orderData.order_notes}
+
+Obrigado!`;
+    
     const phoneNumber = "+351937854433";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
+    // Show fallback message
+    alert('Order form temporarily unavailable. Redirecting to WhatsApp...');
     window.open(whatsappUrl, '_blank');
 }
+
+// Fallback to WhatsApp if EmailJS fails
+function fallbackToWhatsApp(orderData) {
+    const message = `Olá! Gostaria de fazer o seguinte pedido:
+
+👤 Nome: ${orderData.customer_name}
+📞 Telefone: ${orderData.customer_phone}
+📧 Email: ${orderData.customer_email}
+📍 Morada: ${orderData.delivery_address}
+📝 Notas: ${orderData.order_notes}
+
+📋 PEDIDO:
+${orderData.order_items}
+
+💰 Total: ${orderData.order_total}
+
+Obrigado!`;
+    
+    const phoneNumber = "+351937854433";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Close modal and clear cart
+    closeOrderForm();
+    cart = [];
+    updateCartDisplay();
+    updateCartCount();
+    saveCartToStorage();
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('orderModal');
+    if (e.target === modal) {
+        closeOrderForm();
+    }
+});
+
+// ESC key to close modal
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeOrderForm();
+    }
+});
 
 // Contact Form Validation (if form is added later)
 function validateContactForm(form) {
@@ -557,9 +952,14 @@ document.addEventListener('DOMContentLoaded', createScrollToTopButton);
 document.addEventListener('DOMContentLoaded', updateCartDisplay);
 
 // WhatsApp Button Click Analytics
-document.querySelector('.whatsapp-btn').addEventListener('click', () => {
-    console.log('WhatsApp button clicked');
-    // You can add analytics tracking here
+document.addEventListener('DOMContentLoaded', function() {
+    const whatsappBtn = document.querySelector('.whatsapp-btn');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+            console.log('WhatsApp button clicked');
+            // You can add analytics tracking here
+        });
+    }
 });
 
 // Performance optimization: Throttle scroll events
