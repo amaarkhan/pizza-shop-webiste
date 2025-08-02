@@ -28,7 +28,7 @@
     .nav-lang-switcher {
         margin-left: 0;
         position: absolute;
-        right: 20px;
+        right: 80px;
         top: 18px;
         background: rgba(0,0,0,0.85);
         border-radius: 20px;
@@ -985,15 +985,28 @@ body {
         max-width: 250px;
     }
 
-    /* Ensure WhatsApp button is visible */
+    /* Mobile adjustments for floating buttons */
     .whatsapp-btn {
         width: 55px;
         height: 55px;
         font-size: 1.6rem;
         bottom: 20px;
         right: 20px;
-        z-index: 1001;
-        display: flex !important;
+    }
+
+    .fixed-cart-button {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+        bottom: 85px;
+        right: 20px;
+    }
+
+    .fixed-cart-button .cart-counter {
+        top: -4px;
+        right: -4px;
+        padding: 2px 6px;
+        font-size: 0.7rem;
     }
 
     /* Adjust sections padding for mobile */
@@ -1061,13 +1074,28 @@ body {
         min-width: 150px;
     }
 
-    /* WhatsApp button for very small screens */
+    /* Very small screen adjustments for floating buttons */
     .whatsapp-btn {
         width: 50px;
         height: 50px;
         font-size: 1.4rem;
         bottom: 15px;
         right: 15px;
+    }
+
+    .fixed-cart-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+        bottom: 75px;
+        right: 15px;
+    }
+
+    .fixed-cart-button .cart-counter {
+        top: -3px;
+        right: -3px;
+        padding: 1px 5px;
+        font-size: 0.6rem;
     }
 
     /* Menu improvements for small screens */
@@ -1136,42 +1164,6 @@ body {
 }
 
 /* Cart System Styles */
-.cart-button {
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 8px 15px;
-    background: #ff6b35;
-    color: white;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-}
-
-@media (min-width: 769px) {
-    .cart-button {
-        position: relative;
-    }
-}
-
-.cart-button:hover {
-    background: #e55a2b;
-    transform: translateY(-2px);
-}
-
-.cart-counter {
-    background: #fff;
-    color: #ff6b35;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    min-width: 20px;
-    text-align: center;
-    display: none;
-}
-
 .cart-sidebar {
     position: fixed;
     top: 0;
@@ -1421,82 +1413,23 @@ body {
 
 /* Mobile cart styles */
 @media (max-width: 768px) {
-    .cart-button {
-        position: fixed;
-        top: 15px;
-        right: 60px;
-        z-index: 1100;
-        padding: 10px;
-        background: #ff6b35;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0;
-        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-    }
-    
-    .cart-button i {
-        font-size: 1.2rem;
-        margin: 0;
-    }
-    
-    .cart-counter {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: #fff;
-        color: #ff6b35;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        font-weight: 700;
-        border: 2px solid #ff6b35;
-        min-width: 20px;
-        padding: 0;
-    }
-    
     .cart-sidebar {
-        width: 100vw;
-        right: -100vw;
+        width: 100%;
+        right: -100%;
     }
-    
-    .cart-notification {
-        right: 10px;
-        left: 10px;
-        width: auto;
-    }
-}
 
 /* Extra small screens */
 @media (max-width: 480px) {
-    .cart-button {
-        right: 55px;
-        width: 42px;
-        height: 42px;
-        top: 16px;
+    .cart-sidebar {
+        padding: 1rem;
     }
     
-    .cart-button i {
-        font-size: 1.1rem;
-    }
-    
-    .cart-counter {
-        width: 18px;
-        height: 18px;
-        font-size: 0.65rem;
-        top: -4px;
-        right: -4px;
+    .cart-header {
+        padding: 1rem;
     }
 }
 
-/* WhatsApp Button */
+/* WhatsApp Button - Fully Responsive */
 .whatsapp-btn {
     position: fixed;
     bottom: 20px;
@@ -1518,6 +1451,71 @@ body {
     text-decoration: none;
     visibility: visible;
     opacity: 1;
+}
+
+/* Fixed Cart Button - Fully Responsive */
+.fixed-cart-button {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #ff6b35;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    z-index: 9998;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    text-decoration: none;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Desktop specific adjustments */
+@media (min-width: 1025px) {
+    .whatsapp-btn {
+        width: 65px;
+        height: 65px;
+        font-size: 2rem;
+        bottom: 25px;
+        right: 25px;
+    }
+    
+    .fixed-cart-button {
+        width: 65px;
+        height: 65px;
+        font-size: 2rem;
+        bottom: 100px;
+        right: 25px;
+    }
+}
+
+.fixed-cart-button:hover {
+    background: #e55a2b;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+}
+
+.fixed-cart-button .cart-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #fff;
+    color: #ff6b35;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+    display: none;
+    border: 2px solid #ff6b35;
 }
 
 .whatsapp-btn:hover {
