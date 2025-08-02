@@ -674,7 +674,7 @@ function submitOrder() {
     
     // Prepare order details
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const deliveryFee = 2.50; // Set your delivery fee
+    const deliveryFee = 0.0; // Set your delivery fee
     const total = subtotal + deliveryFee;
     
     // Generate unique order ID
